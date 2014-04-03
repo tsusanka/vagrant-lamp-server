@@ -6,6 +6,9 @@
     "apache2": {
       "locked_version": "1.10.0"
     },
+    "php": {
+      "locked_version": "1.4.6"
+    },
     "iptables": {
       "locked_version": "0.13.0"
     },
@@ -14,6 +17,30 @@
     },
     "pacman": {
       "locked_version": "1.1.1"
+    },
+    "build-essential": {
+      "locked_version": "2.0.0"
+    },
+    "xml": {
+      "locked_version": "1.2.4"
+    },
+    "mysql": {
+      "locked_version": "5.0.2"
+    },
+    "yum-epel": {
+      "locked_version": "0.3.4"
+    },
+    "yum": {
+      "locked_version": "3.1.6"
+    },
+    "windows": {
+      "locked_version": "1.30.2"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.5"
+    },
+    "iis": {
+      "locked_version": "2.1.0"
     }
   }
 }
