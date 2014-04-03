@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network :forwarded_port, guest: 80, host: 50080
+  # config.vm.network :forwarded_port, guest: 80, host: 50080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -44,6 +44,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # default cookbook_path is ./cookbooks/ so no need to configure that
   config.vm.provision :chef_solo do |chef|
      chef.add_recipe "apt"
+     chef.add_recipe "apache2"
+
+     chef.json = {
+        "apache" => {
+             "docroot_dir" => "/var/www"
+        }
+     }
+
   end
 
   config.vm.provider "virtualbox" do |v|
