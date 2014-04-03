@@ -42,9 +42,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # After Chef is installed, let Chef do the magic
   #
   # default cookbook_path is ./cookbooks/ so no need to configure that
-  # config.vm.provision :chef_solo do |chef|
-     # chef.add_recipe "apt"
-  # end
+  config.vm.provision :chef_solo do |chef|
+     chef.add_recipe "apt"
+  end
 
   config.vm.provider "virtualbox" do |v|
      v.memory = 1024
