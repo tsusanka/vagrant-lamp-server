@@ -14,6 +14,9 @@
       "git": "git://github.com/homemade/chef-dotdeb.git",
       "ref": "a3633b25f1f011da73cc510d9516c09ad0277497"
     },
+    "mysql": {
+      "locked_version": "5.0.2"
+    },
     "iptables": {
       "locked_version": "0.13.0"
     },
@@ -28,9 +31,6 @@
     },
     "xml": {
       "locked_version": "1.2.4"
-    },
-    "mysql": {
-      "locked_version": "5.0.2"
     },
     "yum-epel": {
       "locked_version": "0.3.4"
