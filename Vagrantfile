@@ -49,6 +49,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      chef.add_recipe "apache2::mod_php5"
      chef.add_recipe "dotdeb::php54"
      chef.add_recipe "php"
+     chef.add_recipe "mysql::server"
+     chef.add_recipe "mysql::client"
      chef.add_recipe "virtual-hosts"
   end
 
