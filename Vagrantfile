@@ -50,6 +50,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		chef.add_recipe "mysql::client"
 		chef.add_recipe "repositories::php54"
 		chef.add_recipe "php"
+		chef.add_recipe "php::module_mysql"
 		chef.add_recipe "virtual-hosts"
 	end
 
