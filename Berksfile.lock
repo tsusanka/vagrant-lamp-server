@@ -9,6 +9,11 @@
     "php": {
       "locked_version": "1.4.6"
     },
+    "dotdeb": {
+      "locked_version": "0.0.1",
+      "git": "git://github.com/homemade/chef-dotdeb.git",
+      "ref": "a3633b25f1f011da73cc510d9516c09ad0277497"
+    },
     "iptables": {
       "locked_version": "0.13.0"
     },
