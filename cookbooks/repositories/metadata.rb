@@ -1,0 +1,6 @@
+name             'repositories'
+maintainer       'Tomas Susanka'
+maintainer_email 'susantom@fit.cvut.cz'
+license          'MIT'
+description      'Adds more apt repositories'
+version          '0.1.0'
