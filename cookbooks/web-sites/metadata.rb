@@ -1,0 +1,6 @@
+name             'web-sites'
+maintainer       'Tomas Susanka'
+maintainer_email 'susantom@fit.cvut.cz'
+license          'MIT'
+description      'Adds Apache domain configuration for sites'
+version          '0.1.0'
