@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: web-sites
+# Cookbook Name:: virtual-hosts
 # Recipe:: default
 #
 
