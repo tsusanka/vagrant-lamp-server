@@ -13,4 +13,5 @@ web_app 'vagrant' do
   server_aliases ['www.v.l']
   docroot '/var/www/'
   directory_options 'FollowSymLinks Indexes'
+  allow_override 'All'
 end
