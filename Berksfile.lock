@@ -12,6 +12,9 @@
     "mysql": {
       "locked_version": "5.1.8"
     },
+    "git": {
+      "locked_version": "4.0.0"
+    },
     "iptables": {
       "locked_version": "0.13.0"
     },
@@ -41,6 +44,12 @@
     },
     "iis": {
       "locked_version": "2.1.0"
+    },
+    "dmg": {
+      "locked_version": "2.2.0"
+    },
+    "runit": {
+      "locked_version": "1.5.10"
     }
   }
 }
