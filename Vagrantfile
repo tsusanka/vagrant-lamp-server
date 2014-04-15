@@ -54,6 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		chef.add_recipe "php::module_mysql"
 		chef.add_recipe "virtual-hosts"
 		chef.add_recipe "git"
+		chef.add_recipe "composer"
 		chef.json = {
 			"mysql" => {
 				"server_root_password" => ""
