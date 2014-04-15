@@ -10,7 +10,7 @@
       "locked_version": "1.4.6"
     },
     "mysql": {
-      "locked_version": "5.0.2"
+      "locked_version": "5.1.8"
     },
     "iptables": {
       "locked_version": "0.13.0"
