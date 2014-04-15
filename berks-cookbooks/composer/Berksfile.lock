@@ -1,0 +1,40 @@
+{
+  "sources": {
+    "composer": {
+      "path": "."
+    },
+    "windows": {
+      "locked_version": "1.30.0"
+    },
+    "chef_handler": {
+      "locked_version": "1.1.5"
+    },
+    "php": {
+      "locked_version": "1.4.2"
+    },
+    "build-essential": {
+      "locked_version": "1.4.4"
+    },
+    "xml": {
+      "locked_version": "1.2.2"
+    },
+    "mysql": {
+      "locked_version": "4.1.2"
+    },
+    "openssl": {
+      "locked_version": "1.1.0"
+    },
+    "homebrew": {
+      "locked_version": "1.5.4"
+    },
+    "yum-epel": {
+      "locked_version": "0.3.4"
+    },
+    "yum": {
+      "locked_version": "3.1.2"
+    },
+    "iis": {
+      "locked_version": "2.0.2"
+    }
+  }
+}

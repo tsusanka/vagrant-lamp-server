@@ -15,6 +15,9 @@
     "git": {
       "locked_version": "4.0.0"
     },
+    "composer": {
+      "locked_version": "1.0.0"
+    },
     "iptables": {
       "locked_version": "0.13.0"
     },
