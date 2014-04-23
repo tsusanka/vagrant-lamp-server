@@ -25,10 +25,13 @@ This is a LAMP server configuration for Vagrant. Chef is used for provisioning. 
 - if you have 32bit system rename `Vagrantfile.32bit.example` to `Vagrantfile`
 - if you have 64bit system and you enabled the 64bit virtualization support in BIOS rename `Vagrantfile.64bit.example` to `Vagrantfile`
  - *If you forget to enable the virtualization support the OS will freeze during the boot with no error message.*
+- In Vagrantfile replace `<YOUR WORK DIRECTORY>` string with your work directory. For example `/home/tomas/Work/`
 
 ### Run it
 
 - Run `vagrant up` and go make a coffee.
+
+When the command finishes you can finally use it. After entering URL `http://v.l` into your browser you should see a welcome message.
 
 ## Use
 
