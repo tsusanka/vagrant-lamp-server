@@ -42,4 +42,4 @@ The list of vagrant commands is listed in its [documentation](http://docs.vagran
 
 ## License
 
-This work is licensed under the MIT License - see the LICENSE file for details.
+This work is licensed under the Apache License - see the LICENSE file for details. This work contains some of the community cookbooks which may be licensed under different license.
