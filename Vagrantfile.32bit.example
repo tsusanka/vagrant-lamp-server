@@ -45,8 +45,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	# After Chef is installed, let Chef do the magic
 	config.vm.provision :chef_solo do |chef|
-		chef.roles_path = "roles/"
-		chef.cookbooks_path = ["cookbooks/", "berks-cookbooks/"]
+		chef.roles_path = "chef/roles/"
+		chef.cookbooks_path = ["chef/cookbooks/", "chef/berks-cookbooks/"]
 		chef.add_role "development"
 	end
 end
