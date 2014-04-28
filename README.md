@@ -18,7 +18,7 @@ This is a LAMP server configuration for Vagrant. Chef is used for provisioning. 
  - *Do NOT install version 4.3.10, it contains bug [#12879](https://www.virtualbox.org/ticket/12879) which breaks file sharing.*
 - install [Vagrant](http://www.vagrantup.com/downloads.html)
 - install Vagrant plugins
- - *just run:* `vagrant plugin install vagrant-hostmanager vagrant-vbguest`
+ - *just run:* `vagrant plugin install vagrant-hostmanager vagrant-vbguest vagrant-nugrant`
 
 ### Get ready
 

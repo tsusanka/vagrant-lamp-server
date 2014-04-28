@@ -1,4 +1,4 @@
 .vagrant/*
-Vagrantfile
+.vagrantuser
 .kitchen/
 .kitchen.local.yml
