@@ -38,7 +38,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	# the path on the host to the actual folder. The second argument is
 	# the path on the guest to mount the folder. And the optional third
 	# argument is a set of non-required options.
-	config.vm.synced_folder config.user.work.folder, "/var/www", :nfs => true # nfs should be ignored on Windows
+	config.vm.synced_folder config.user.work.folder, "/vagrant-nfs", :nfs => true # nfs should be ignored on Windows
+	
+	config.bindfs.bind_folder "/vagrant-nfs", "/var/www",
+	  :owner => "www-data",
+	  :group => "www-data"
 
 	# Simple bash script to check if Chef is installed
 	config.vm.provision "shell", path: "bash/bootstrap.sh"
