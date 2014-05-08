@@ -41,8 +41,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	config.vm.synced_folder config.user.work.folder, "/vagrant-nfs", :nfs => true # nfs should be ignored on Windows
 	
 	config.bindfs.bind_folder "/vagrant-nfs", "/var/www",
-	  :owner => "www-data",
-	  :group => "www-data"
+		:owner => "www-data",
+		:group => "www-data",
+		:perms => "777"
 
 	# Simple bash script to check if Chef is installed
 	config.vm.provision "shell", path: "bash/bootstrap.sh"
