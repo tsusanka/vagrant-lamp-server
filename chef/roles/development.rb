@@ -19,7 +19,26 @@ run_list(
 
 # attributes setup
 override_attributes(
+	# empty mysql password
 	"mysql" => {
 		"server_root_password" => ""
+	},
+	# attributes for php5's php.ini file. Sets some directives to suit development enviroment
+	"php" => {
+		"conf_dir" => "/etc/php5/apache2",
+		"directives" => {
+			:display_errors => "On",
+			:display_startup_errors => "On",
+			:error_reporting => "E_ALL",
+			:html_errors => "On",
+			:log_errors => "On",
+			:max_input_time => "60",
+			:output_buffering => "4096",
+			:register_argc_argv => "Off",
+			:request_order => "GP",
+			:short_open_tag => "Off",
+			:track_errors => "On",
+			:variables_order => "GPCS",
+		}
 	}
 )
