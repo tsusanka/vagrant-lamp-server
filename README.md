@@ -28,7 +28,7 @@ This is a LAMP server configuration for Vagrant. Chef is used for provisioning. 
 - if you have 32bit system, use the box settings hidden in the comments
 - if you have 64bit system, make sure you have enabled the 64bit virtualization support
  - *If you forget to enable the virtualization support, the OS will freeze during the boot with no error message.*
-
+- if you are on Linux, install `nfs-kernel-service` package
 
 ### Run it
 
