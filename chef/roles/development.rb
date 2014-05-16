@@ -12,6 +12,7 @@ run_list(
 	"recipe[php]",
 	"recipe[php::module_mysql]",
 	"recipe[php::module_curl]",
+	"recipe[php::module_gd]",
 	"recipe[virtual-hosts]",
 	"recipe[git]",
 	"recipe[composer]",
