@@ -1,13 +1,13 @@
 
 # 32bit:
 # box:
-#  name: "baseubuntu12.04-32bit"
-#  url: "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-i386-vagrant-disk1.box"
+#  name: "baseubuntu14.04-32bit"
+#  url: "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
 
 # 64bit:
 box:
-  name: "baseubuntu12.04"
-  url: "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+  name: "baseubuntu14.04"
+  url: "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
 work:
   folder: "/home/tomas/Prace/"
