@@ -8,7 +8,6 @@ run_list(
 	"recipe[apache2::mod_rewrite]",
 	"recipe[mysql::server]",
 	"recipe[mysql::client]",
-	"recipe[repositories::php54]",
 	"recipe[php]",
 	"recipe[php::module_mysql]",
 	"recipe[php::module_curl]",
