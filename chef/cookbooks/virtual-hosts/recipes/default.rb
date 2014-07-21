@@ -11,7 +11,7 @@ include_recipe "apache2"
 web_app 'vagrant' do
   server_name 'v.l'
   server_aliases ['www.v.l']
-  docroot '/var/www/'
+  docroot '/www/'
   directory_options 'FollowSymLinks Indexes'
   allow_override 'All'
 end
