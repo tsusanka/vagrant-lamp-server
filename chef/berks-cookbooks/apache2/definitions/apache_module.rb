@@ -29,23 +29,23 @@ define :apache_module, :enable => true, :conf => false do
   if platform_family?('rhel', 'fedora', 'arch', 'suse', 'freebsd')
     file "#{node['apache']['dir']}/mods-available/#{params[:name]}.load" do
       content "LoadModule #{params[:identifier]} #{params[:module_path]}\n"
-      mode    '0644'
+      mode '0644'
     end
   end
 
   if params[:enable]
     execute "a2enmod #{params[:name]}" do
       command "/usr/sbin/a2enmod #{params[:name]}"
-      notifies :reload, 'service[apache2]'
+      notifies :reload, 'service[apache2]', :delayed
       not_if do
         ::File.symlink?("#{node['apache']['dir']}/mods-enabled/#{params[:name]}.load") &&
-        (::File.exists?("#{node['apache']['dir']}/mods-available/#{params[:name]}.conf") ? ::File.symlink?("#{node['apache']['dir']}/mods-enabled/#{params[:name]}.conf") : true)
+        (::File.exist?("#{node['apache']['dir']}/mods-available/#{params[:name]}.conf") ? ::File.symlink?("#{node['apache']['dir']}/mods-enabled/#{params[:name]}.conf") : true)
       end
     end
   else
     execute "a2dismod #{params[:name]}" do
       command "/usr/sbin/a2dismod #{params[:name]}"
-      notifies :reload, 'service[apache2]'
+      notifies :reload, 'service[apache2]', :delayed
       only_if { ::File.symlink?("#{node['apache']['dir']}/mods-enabled/#{params[:name]}.load") }
     end
   end

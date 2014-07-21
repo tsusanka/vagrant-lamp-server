@@ -1,5 +1,8 @@
 DEPENDENCIES
   apache2
+    git: https://github.com/onehealth-cookbooks/apache2.git
+    revision: 23a69ab611a4e76e7e536c31336d73e6812ad8fd
+    branch: COOK-3900
   apt
   composer
   git
@@ -7,7 +10,8 @@ DEPENDENCIES
   php
 
 GRAPH
-  apache2 (1.10.4)
+  apache2 (1.10.5)
+    freebsd (>= 0.0.0)
     iptables (>= 0.0.0)
     logrotate (>= 0.0.0)
     pacman (>= 0.0.0)
@@ -19,6 +23,7 @@ GRAPH
     php (>= 0.0.0)
     windows (>= 0.0.0)
   dmg (2.2.0)
+  freebsd (0.1.4)
   git (4.0.2)
     build-essential (>= 0.0.0)
     dmg (>= 0.0.0)

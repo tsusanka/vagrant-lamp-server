@@ -21,6 +21,28 @@ package 'apache2' do
   package_name node['apache']['package']
 end
 
+service 'apache2' do
+  case node['platform_family']
+  when 'rhel', 'fedora', 'suse'
+    service_name 'httpd'
+    # If restarted/reloaded too quickly httpd has a habit of failing.
+    # This may happen with multiple recipes notifying apache to restart - like
+    # during the initial bootstrap.
+    restart_command '/sbin/service httpd restart && sleep 1'
+    reload_command '/sbin/service httpd reload && sleep 1'
+  when 'debian'
+    service_name 'apache2'
+    restart_command '/usr/sbin/invoke-rc.d apache2 restart && sleep 1'
+    reload_command '/usr/sbin/invoke-rc.d apache2 reload && sleep 1'
+  when 'arch'
+    service_name 'httpd'
+  when 'freebsd'
+    service_name 'apache22'
+  end
+  supports [:start, :restart, :reload, :status]
+  action [:enable, :start]
+end
+
 if platform_family?('rhel', 'fedora', 'arch', 'suse', 'freebsd')
   directory node['apache']['log_dir'] do
     mode '0755'
@@ -30,14 +52,14 @@ if platform_family?('rhel', 'fedora', 'arch', 'suse', 'freebsd')
 
   cookbook_file '/usr/local/bin/apache2_module_conf_generate.pl' do
     source 'apache2_module_conf_generate.pl'
-    mode   '0755'
-    owner  'root'
-    group  node['apache']['root_group']
+    mode '0755'
+    owner 'root'
+    group node['apache']['root_group']
   end
 
-  %w[sites-available sites-enabled mods-available mods-enabled].each do |dir|
+  %w(sites-available sites-enabled mods-available mods-enabled).each do |dir|
     directory "#{node['apache']['dir']}/#{dir}" do
-      mode  '0755'
+      mode '0755'
       owner 'root'
       group node['apache']['root_group']
     end
@@ -45,20 +67,21 @@ if platform_family?('rhel', 'fedora', 'arch', 'suse', 'freebsd')
 
   execute 'generate-module-list' do
     command "/usr/local/bin/apache2_module_conf_generate.pl #{node['apache']['lib_dir']} #{node['apache']['dir']}/mods-available"
-    action  :nothing
+    action :nothing
   end
 
-  %w[a2ensite a2dissite a2enmod a2dismod].each do |modscript|
+  %w(a2ensite a2dissite a2enmod a2dismod).each do |modscript|
     template "/usr/sbin/#{modscript}" do
       source "#{modscript}.erb"
-      mode  '0700'
+      mode '0700'
       owner 'root'
       group node['apache']['root_group']
+      action :create
     end
   end
 
   # installed by default on centos/rhel, remove in favour of mods-enabled
-  %w[proxy_ajp auth_pam authz_ldap webalizer ssl welcome].each do |f|
+  %w(proxy_ajp auth_pam authz_ldap webalizer ssl welcome).each do |f|
     file "#{node['apache']['dir']}/conf.d/#{f}.conf" do
       action :delete
       backup false
@@ -85,12 +108,12 @@ if platform_family?('freebsd')
     action :delete
   end
 
-  %w[
-      httpd-autoindex.conf httpd-dav.conf httpd-default.conf httpd-info.conf
-      httpd-languages.conf httpd-manual.conf httpd-mpm.conf
-      httpd-multilang-errordoc.conf httpd-ssl.conf httpd-userdir.conf
-      httpd-vhosts.conf
-  ].each do |f|
+  %w(
+    httpd-autoindex.conf httpd-dav.conf httpd-default.conf httpd-info.conf
+    httpd-languages.conf httpd-manual.conf httpd-mpm.conf
+    httpd-multilang-errordoc.conf httpd-ssl.conf httpd-userdir.conf
+    httpd-vhosts.conf
+  ).each do |f|
     file "#{node['apache']['dir']}/extra/#{f}" do
       action :delete
       backup false
@@ -102,13 +125,13 @@ if platform_family?('freebsd')
   end
 end
 
-%W[
+%W(
   #{node['apache']['dir']}/ssl
   #{node['apache']['dir']}/conf.d
   #{node['apache']['cache_dir']}
-].each do |path|
+).each do |path|
   directory path do
-    mode  '0755'
+    mode '0755'
     owner 'root'
     group node['apache']['root_group']
   end
@@ -116,10 +139,10 @@ end
 
 # Set the preferred execution binary - prefork or worker
 template '/etc/sysconfig/httpd' do
-  source   'etc-sysconfig-httpd.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
+  source 'etc-sysconfig-httpd.erb'
+  owner 'root'
+  group node['apache']['root_group']
+  mode '0644'
   notifies :restart, 'service[apache2]'
   only_if  { platform_family?('rhel', 'fedora') }
 end
@@ -133,47 +156,62 @@ template 'apache2.conf' do
   when 'freebsd'
     path "#{node['apache']['dir']}/httpd.conf"
   end
-  source   'apache2.conf.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
-  notifies :reload, 'service[apache2]'
+  case node['apache']['version']
+  when '2.4'
+    source 'apache2.4.conf.erb'
+  else
+    source 'apache2.conf.erb'
+  end
+  owner 'root'
+  group node['apache']['root_group']
+  mode '0644'
+  notifies :reload, 'service[apache2]', :delayed
 end
 
 template 'apache2-conf-security' do
-  path     "#{node['apache']['dir']}/conf.d/security.conf"
-  source   'security.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
-  backup   false
-  notifies :reload, 'service[apache2]'
+  path "#{node['apache']['dir']}/conf.d/security.conf"
+  source 'security.erb'
+  owner 'root'
+  group node['apache']['root_group']
+  mode '0644'
+  backup false
+  notifies :reload, 'service[apache2]', :delayed
 end
 
 template 'apache2-conf-charset' do
-  path      "#{node['apache']['dir']}/conf.d/charset.conf"
-  source   'charset.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
-  backup   false
-  notifies :reload, 'service[apache2]'
+  path "#{node['apache']['dir']}/conf.d/charset.conf"
+  source 'charset.erb'
+  owner 'root'
+  group node['apache']['root_group']
+  mode '0644'
+  backup false
+  notifies :reload, 'service[apache2]', :delayed
 end
 
 template "#{node['apache']['dir']}/ports.conf" do
-  source   'ports.conf.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
-  notifies :reload, 'service[apache2]'
+  source 'ports.conf.erb'
+  owner 'root'
+  group node['apache']['root_group']
+  mode '0644'
+  notifies :reload, 'service[apache2]', :delayed
 end
 
-template "#{node['apache']['dir']}/sites-available/default" do
-  source   'default-site.erb'
-  owner    'root'
-  group    node['apache']['root_group']
-  mode     '0644'
-  notifies :reload, 'service[apache2]'
+template "#{node['apache']['dir']}/sites-available/default.conf" do
+  case node['apache']['version']
+  when '2.4'
+    source 'default-site2.4.erb'
+  else
+    source 'default-site.erb'
+  end
+  owner 'root'
+  group node['apache']['root_group']
+  mode '0644'
+  notifies :reload, 'service[apache2]', :delayed
+end
+
+if node['apache']['version'] == '2.4'
+  # in apache 2.4 on ubuntu, you need to explicitly load the mpm you want to use, it is no longer compiled in.
+  include_recipe "apache2::mpm_#{node['apache']['mpm']}"
 end
 
 node['apache']['default_modules'].each do |mod|
@@ -181,28 +219,6 @@ node['apache']['default_modules'].each do |mod|
   include_recipe "apache2::#{module_recipe_name}"
 end
 
-apache_site 'default' do
+apache_site node['apache']['default_site_name'] do
   enable node['apache']['default_site_enabled']
-end
-
-service 'apache2' do
-  case node['platform_family']
-  when 'rhel', 'fedora', 'suse'
-    service_name 'httpd'
-    # If restarted/reloaded too quickly httpd has a habit of failing.
-    # This may happen with multiple recipes notifying apache to restart - like
-    # during the initial bootstrap.
-    restart_command '/sbin/service httpd restart && sleep 1'
-    reload_command '/sbin/service httpd reload && sleep 1'
-  when 'debian'
-    service_name 'apache2'
-    restart_command '/usr/sbin/invoke-rc.d apache2 restart && sleep 1'
-    reload_command '/usr/sbin/invoke-rc.d apache2 reload && sleep 1'
-  when 'arch'
-    service_name 'httpd'
-  when 'freebsd'
-    service_name 'apache22'
-  end
-  supports [:restart, :reload, :status]
-  action [:enable, :start]
 end
