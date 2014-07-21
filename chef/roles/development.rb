@@ -23,6 +23,9 @@ override_attributes(
 	"mysql" => {
 		"server_root_password" => ""
 	},
+	"apache" => {
+		"version" => "2.4"
+	},
 	# attributes for php5's php.ini file. Sets some directives to suit development enviroment
 	"php" => {
 		"conf_dir" => "/etc/php5/apache2",
