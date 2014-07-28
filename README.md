@@ -3,9 +3,9 @@ Vagrant LAMP server
 
 This is a LAMP server configuration for Vagrant. Chef is used for provisioning. The server should be used only for development purposes. The server contains:
 
-- Ubuntu 12.04 (either 32bit or 64bit)
-- apache 2.2
-- PHP 5.4
+- Ubuntu 14.04 (either 32bit or 64bit)
+- apache 2.4
+- PHP 5.5
 - MySQL 5.5
 - composer
 - git, chef, screen
