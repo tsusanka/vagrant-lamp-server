@@ -16,6 +16,7 @@ run_list(
 	"recipe[virtual-hosts]",
 	"recipe[git]",
 	"recipe[composer]",
+	"recipe[opcache::disable]",
 )
 
 # attributes setup
