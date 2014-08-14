@@ -37,7 +37,7 @@ override_attributes(
 			:short_open_tag => "Off",
 			:upload_max_filesize => "50M",
 			:post_max_size => "50M",
-			:memory_limit => "512MB"
+			:memory_limit => "512M"
 		}
 	}
 )
