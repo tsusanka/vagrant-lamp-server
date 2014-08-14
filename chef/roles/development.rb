@@ -35,6 +35,9 @@ override_attributes(
 			:display_startup_errors => "On",
 			:html_errors => "On",
 			:short_open_tag => "Off",
+			:upload_max_filesize => "50M",
+			:post_max_size => "50M",
+			:memory_limit => "512MB"
 		}
 	}
 )
