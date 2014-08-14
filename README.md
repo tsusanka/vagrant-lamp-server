@@ -6,7 +6,7 @@ This is a LAMP server configuration for Vagrant. Chef is used for provisioning. 
 - Ubuntu 14.04 (either 32bit or 64bit)
 - apache 2.4
 - PHP 5.5
-- MySQL 5.5
+- MySQL 5.5, SQLite 3
 - composer
 - git, chef, screen
 
